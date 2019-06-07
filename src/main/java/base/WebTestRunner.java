@@ -7,6 +7,8 @@ import org.testng.annotations.BeforeMethod;
 import java.io.IOException;
 
 import static base.utils.NetworkHelper.getStatusCodeOfServer;
+import static com.codeborne.selenide.Configuration.baseUrl;
+import static com.codeborne.selenide.Selenide.open;
 
 public class WebTestRunner extends ApplicationManager {
 
@@ -16,14 +18,16 @@ public class WebTestRunner extends ApplicationManager {
     public void setUp() throws IOException {
         /* Проверим код ответа сервера */
         getStatusCodeOfServer(configuration.siteUrl());
-        init();
-        webDriver.get(configuration.siteUrl());
+        Context.initialize();
+//        init();
+//        webDriver.get(configuration.siteUrl());
+        open(baseUrl);
     }
 
-    @AfterMethod
-    public void tearDown() {
-        stop();
-    }
+//    @AfterMethod
+//    public void tearDown() {
+//        stop();
+//    }
 
     public void goToWebsite() {
         webDriver.get(configuration.siteUrl());
