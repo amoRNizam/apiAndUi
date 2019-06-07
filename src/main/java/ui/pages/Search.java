@@ -32,7 +32,7 @@ public class Search extends WebTestRunner {
     @FindBy(xpath = "(//h2[contains(@class, 'organic__title-wrapper')]//child::a)[last()-1]")
     private WebElement penultimateItemInTheList;
 
-    public ElementsCollection elementsList = $$(".serp-item h2>a");
+    private ElementsCollection elementsList = $$(".serp-item h2>a");
 
     public void search(String searchText) {
         waitElement(inputSearch, webDriver);
@@ -58,11 +58,9 @@ public class Search extends WebTestRunner {
     }
 
     public void displaysReferencePenultimateElementList2() {
-        int sizeList = elementsList.size();
-        SelenideElement element = elementsList.get(sizeList-2);
-
-        System.out.println(element.getText());
+        SelenideElement element = elementsList.get(elementsList.size()-2).shouldBe(Condition.visible);
+        String link = element.getAttribute("href");
+        System.out.println(link);
         element.click();
-        waitSec(40);
     }
 }
